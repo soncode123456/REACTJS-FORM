@@ -22,31 +22,38 @@ const RegisterForm = () => {
 
         onSubmit:(values, {resetForm}) => {
             console.log(values);
-
-            // Reset lại form sau khi submit đăng ký
-            resetForm();
+            // Hiển thị thông báo sau khi đăng ký thành công
+            alert('Đăng ký tài khoản thành công!');
+            // Reset lại form sau khi submit đăng ký thành công
+            resetForm({values: {
+                username:'',
+                email:'',
+                gender:'',
+                country:'usa',
+                password:'',
+            }});
         },
     });
 
     return (
         <form className='container' onSubmit={frmLogin.handleSubmit}>
-            <div className='w-50 mx-auto card'>
-                <div className="card-header text-center">
+            <div className='w-50 mx-auto card form-container'>
+                <div className="card-header text-center bg-white border-0">
                     <h3 className='fw-bold'>User Registration</h3>
                 </div>
                 <div className="card-body">
                     <div className="form-group mt-2">
                         <label htmlFor="username">Username</label>
                         <input data-type='username' className='form-control' type="" id='username' name='username' placeholder='input username' onChange={frmLogin.handleChange} onBlur={frmLogin.handleBlur} value={frmLogin.values.username}/>
-                        {frmLogin.errors.username && <p className='alert alert-danger my-1'>{frmLogin.errors.username}</p>}
+                        {frmLogin.errors.username && frmLogin.touched.username && <p className='alert alert-danger my-1'>{frmLogin.errors.username}</p>}
                     </div>
                     <div className="form-group mt-2">
                         <label htmlFor="email">Email</label>
                         <input data-type='email' className='form-control' type="" id='email' name='email' placeholder='input email' onChange={frmLogin.handleChange} onBlur={frmLogin.handleBlur} value={frmLogin.values.email}/>
-                        {frmLogin.errors.email && <p className='alert alert-danger my-1'>{frmLogin.errors.email}</p>}
+                        {frmLogin.errors.email && frmLogin.touched.email && <p className='alert alert-danger my-1'>{frmLogin.errors.email}</p>}
                     </div>
                     <div className="form-group mt-2">
-                        <label className='fw-bold' htmlFor="gender">Gender</label>
+                        <label className='d-block mb-2' htmlFor="gender">Gender</label>
                         <input className='form-check-input mx-2' type="radio" id='female' name='gender' placeholder='' value='female' onChange={frmLogin.handleChange} onBlur={frmLogin.handleBlur} checked={frmLogin.values.gender === 'female'} />
                         <label htmlFor="female" className='ms-2'>Female</label>
                         <input className='form-check-input mx-2' type="radio" id='male' value='male' name='gender' placeholder='' onChange={frmLogin.handleChange} onBlur={frmLogin.handleBlur} checked={frmLogin.values.gender === 'male'} />
@@ -66,10 +73,10 @@ const RegisterForm = () => {
                     <div className="form-group mt-2">
                         <label htmlFor="password">Password</label>
                         <input data-type='password' className='form-control' type="password" id='password' name='password' placeholder='input password' onChange={frmLogin.handleChange} onBlur={frmLogin.handleBlur} value={frmLogin.values.password}/>
-                        {frmLogin.errors.password && <p className='alert alert-danger my-1'>{frmLogin.errors.password}</p>}
+                        {frmLogin.errors.password && frmLogin.touched.password && <p className='alert alert-danger my-1'>{frmLogin.errors.password}</p>}
                     </div>
                     <div className='text-center mt-2'>
-                        <button type='submit' className='btn btn-primary mt-2'>Register</button>
+                        <button type='submit' className='btn btn-primary mt-2 w-100'>Register</button>
                     </div>
                 </div>
             </div>
